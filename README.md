@@ -11,6 +11,9 @@ Built with Godot 4.1
 
 ## References
 
+https://vnitti.itch.io/glacial-mountains-parallax-background
+
+
 
 ## Future Development
 
