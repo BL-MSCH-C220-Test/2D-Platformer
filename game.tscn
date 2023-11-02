@@ -1,7 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://chu0menp5a4jn"]
+[gd_scene load_steps=25 format=3 uid="uid://chu0menp5a4jn"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_dluj2"]
-[ext_resource type="Texture2D" uid="uid://d3eoki2kcwd7x" path="res://Assets/player.png" id="2_ymiwy"]
+[ext_resource type="Texture2D" uid="uid://4ici436spjmn" path="res://Assets/player.png" id="2_ymiwy"]
+[ext_resource type="Texture2D" uid="uid://bfao1i8ibngu7" path="res://icon.svg" id="3_ojse5"]
+[ext_resource type="Script" path="res://Traps/Spike.gd" id="4_hbvgf"]
+[ext_resource type="Texture2D" uid="uid://dfjltxicc3mmo" path="res://Assets/spikes.png" id="5_0lmq1"]
+[ext_resource type="Script" path="res://Traps/Blade.gd" id="6_x6ukn"]
+[ext_resource type="Texture2D" uid="uid://djf4sfo2dotss" path="res://Assets/blade.png" id="7_33v36"]
+[ext_resource type="Script" path="res://Traps/Button.gd" id="8_dqoo2"]
+[ext_resource type="Texture2D" uid="uid://cb3uc6iw8umxr" path="res://Assets/switchGreen.png" id="9_rfu5l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vqdd"]
 size = Vector2(1152, 50)
@@ -102,6 +109,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8b38r"]
 size = Vector2(15, 46)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3sk2h"]
+radius = 32.7567
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8djqq"]
+radius = 200.0
+
 [node name="Game" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -112,6 +125,7 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_1vqdd")
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(300, 500)
 script = ExtResource("1_dluj2")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Player"]
@@ -122,3 +136,59 @@ autoplay = "Jump"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(-1.5, 6)
 shape = SubResource("RectangleShape2D_8b38r")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(480, 1169)
+scale = Vector2(8.91406, 8.91406)
+texture = ExtResource("3_ojse5")
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="Spike" type="Area2D" parent="Traps"]
+position = Vector2(465, 567)
+script = ExtResource("4_hbvgf")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Traps/Spike"]
+texture = ExtResource("5_0lmq1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Traps/Spike"]
+polygon = PackedVector2Array(-8, -1.2, -8, 2.5, 0.5, 20.2, 10.7, -3, 12.5, -3, 18, -6.3, 20, -5.2, 20, -4, 24, -1, 24, 2.5, 32, 18.5, 32, 32, -32, 32, -32, 25.9, -23.4, 1, -22.1, 1, -19, -3.6, -19, -7.4)
+
+[node name="Blade" type="Area2D" parent="Traps"]
+position = Vector2(105, 543)
+script = ExtResource("6_x6ukn")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Traps/Blade"]
+texture = ExtResource("7_33v36")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/Blade"]
+shape = SubResource("CircleShape2D_3sk2h")
+
+[node name="Button" type="Area2D" parent="Traps"]
+position = Vector2(626, 535)
+script = ExtResource("8_dqoo2")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Traps/Button"]
+texture = ExtResource("9_rfu5l")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Traps/Button"]
+polygon = PackedVector2Array(18, -21.8, 18, -20.3, 29, -15.3, 29, -13.9, 37, -6.9, 37, -4.6, 46, 9.4, 46, 14, 46.9, 30, 51.6, 30, 64, 37.7, 64, 64, -64, 64, -64, 39, -55.8, 31, -51.3, 31, -47, 30.3, -47, 16.7, -41.5, -1, -40, -1, -28, -16, -25.3, -16, -11, -22.3, -11, -24.2)
+
+[node name="Timer" type="Timer" parent="Traps/Button"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Damage" type="Area2D" parent="Traps/Button"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/Button/Damage"]
+shape = SubResource("CircleShape2D_8djqq")
+
+[connection signal="body_entered" from="Traps/Spike" to="Traps/Spike" method="_on_body_entered"]
+[connection signal="body_entered" from="Traps/Blade" to="Traps/Blade" method="_on_body_entered"]
+[connection signal="body_entered" from="Traps/Button" to="Traps/Button" method="_on_body_entered"]
+[connection signal="timeout" from="Traps/Button/Timer" to="Traps/Button" method="_on_timer_timeout"]
