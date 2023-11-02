@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://msu6wlvwxvxd"]
+
+[ext_resource type="Script" path="res://Player/Player_Selection.gd" id="1_yxtpr"]
+[ext_resource type="Texture2D" uid="uid://c5fbtmbnhdq05" path="res://Assets/Adventurer.png" id="2_h12q8"]
+[ext_resource type="Texture2D" uid="uid://j0ixv4yc5tle" path="res://Assets/Warrior.png" id="3_bkyje"]
+
+[node name="Player_Selection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yxtpr")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 400.0
+grow_horizontal = 2
+text = "Select Your Character"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Adventurer" type="TextureButton" parent="."]
+clip_contents = true
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -24.0
+offset_right = -126.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_h12q8")
+ignore_texture_size = true
+
+[node name="Warrior" type="TextureButton" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 124.0
+offset_top = -20.0
+offset_right = 174.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_bkyje")
+ignore_texture_size = true
+
+[connection signal="pressed" from="Adventurer" to="." method="_on_adventurer_pressed"]
+[connection signal="pressed" from="Warrior" to="." method="_on_warrior_pressed"]
