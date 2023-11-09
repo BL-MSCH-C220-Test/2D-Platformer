@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://5dreg3dkrkkk"]
+
+[ext_resource type="Texture2D" uid="uid://bfao1i8ibngu7" path="res://icon.svg" id="1_wrq1n"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gyvf2"]
+texture = ExtResource("1_wrq1n")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_pk7sl"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_gyvf2")
+
+[node name="Terrain1" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_pk7sl")
+format = 2
+layer_0/tile_data = PackedInt32Array(262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0)
