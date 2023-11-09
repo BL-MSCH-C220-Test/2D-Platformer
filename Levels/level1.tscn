@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b27q7caavi4i6"]
+
+[ext_resource type="Texture2D" uid="uid://bfao1i8ibngu7" path="res://icon.svg" id="1_pkmoe"]
+[ext_resource type="PackedScene" uid="uid://c55r8dyidphyg" path="res://Player/player_container.tscn" id="2_6frcj"]
+[ext_resource type="PackedScene" uid="uid://blq0dcfj2eel0" path="res://Levels/exit.tscn" id="3_bktrb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ppid8"]
+texture = ExtResource("1_pkmoe")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_62f31"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_ppid8")
+
+[node name="Game" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_62f31")
+format = 2
+layer_0/tile_data = PackedInt32Array(262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 327679, 0, 0, 327678, 0, 0)
+
+[node name="Player_Container" parent="." instance=ExtResource("2_6frcj")]
+
+[node name="Spawn" type="Marker2D" parent="Player_Container"]
+position = Vector2(100, 400)
+
+[node name="Exit" parent="." instance=ExtResource("3_bktrb")]
+position = Vector2(1399, 426)
+
+[connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]
