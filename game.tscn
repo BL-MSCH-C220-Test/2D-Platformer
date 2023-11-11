@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://chu0menp5a4jn"]
+[gd_scene load_steps=17 format=3 uid="uid://chu0menp5a4jn"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_dluj2"]
-[ext_resource type="Texture2D" uid="uid://d3eoki2kcwd7x" path="res://Assets/player.png" id="2_ymiwy"]
+[ext_resource type="Texture2D" uid="uid://4ici436spjmn" path="res://Assets/player.png" id="2_ymiwy"]
+[ext_resource type="PackedScene" uid="uid://dlnhosi4wgc1n" path="res://UI/menu.tscn" id="3_luta4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vqdd"]
 size = Vector2(1152, 50)
@@ -122,3 +123,7 @@ autoplay = "Jump"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(-1.5, 6)
 shape = SubResource("RectangleShape2D_8b38r")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Menu" parent="UI" instance=ExtResource("3_luta4")]
